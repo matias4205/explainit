@@ -1,0 +1,14 @@
+{
+  "name": "explainit",
+  "version": "1.0.0",
+  "description": "Simplifing the way you explain your projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "matias4205",
+  "license": "MIT"
+}
