@@ -1,6 +1,7 @@
 @import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap');
 
+
 :root {
   --green-100: #CDF5EE;
   --green-300: #91E9D9;
@@ -26,6 +27,7 @@
   --pattern-hexagons: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23ffffff' fill-opacity='0.2' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   --pattern-dots: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.2' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
 
+  --box-shadow-sm: 0px 1px 6px #00000010;
   --box-shadow-lg: 0px 0px 20px 4px #00000025;
   --background: --var(--gray-100);
 }
@@ -42,20 +44,46 @@
   align-items: flex-end;
   position: absolute;
   bottom: 20px;
-  right: 20px;
+  right: 35px;
   font-family: 'Nunito Sans';
 }
 
-.explainit__content {
-  display: flex;
-  flex-direction: column;
-  height: 600px;
+.explainit__frame {
+  display: none;
+  height: calc(100vh - 120px);
+  min-height: 256px;
+  max-height: 750px;
   background-color: var(--white);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--box-shadow-lg);
   margin-bottom: 20px;
   width: 360px;
   overflow: hidden;
+  animation: .3s fadeInUp forwards;
+}
+
+.explainit__frame--opened {
+  display: block;
+}
+
+.frame__inner {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.frame__inner::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+  background-color: #00000015;
+}
+
+.frame__inner::-webkit-scrollbar-thumb {
+  background-color: #00000033;
+  width: 8px;
+  border: 1px solid #EAEAEA;
+  border-radius: 20px;
 }
 
 .header {
@@ -107,17 +135,27 @@
 .card {
   background-color: var(--white);
   border-radius: var(--border-radius-md);
-  padding: 12px 15px;
+  padding: 16px 15px;
   box-shadow: var(--box-shadow-sm);
+  margin-bottom: 12px;
 }
 
 .card__head {
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   background-color: var(--white);
   border-radius: var(--border-radius-md);
 }
 
+.card__head h3 {
+  font-weight: 600;
+}
+
+.card__content {
+  font-size: 15px;
+}
+
 .explainit__launcher {
+  cursor: pointer;
   display: flex;
   width: 60px;
   height: 60px;
@@ -126,4 +164,42 @@
   border-radius: var(--border-radius-full);
   background-color: var(--green-500);
   box-shadow: var(--box-shadow-lg);
+}
+
+.stack {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.stack__item {
+  margin: 0 .4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.stack__item svg {
+  width: 28px;
+}
+
+.stack__item:first-child {
+  margin-left: 0;
+}
+
+.stack__item:last-child {
+  margin-right: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
