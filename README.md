@@ -1,5 +1,5 @@
 # ExplainIT
-ExplainIT is an easly configurable widget that helps you explain your personal project.
+ExplainIT is an easily configurable widget that helps you explain your personal project.
 
 ### How to use it?
 
