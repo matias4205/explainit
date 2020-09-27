@@ -52,7 +52,7 @@
   display: none;
   height: calc(100vh - 120px);
   min-height: 256px;
-  max-height: 750px;
+  max-height: 650px;
   background-color: var(--white);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--box-shadow-lg);
@@ -69,7 +69,8 @@
 .frame__inner {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
 }
 
@@ -189,6 +190,33 @@
 }
 
 .stack__item:last-child {
+  margin-right: 0;
+}
+
+.media {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.media__item {
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.media__item svg {
+  width: 18px;
+  fill: var(--gray-300);
+}
+
+.media__item:first-child {
+  margin-left: 0;
+}
+
+.media__item:last-child {
   margin-right: 0;
 }
 
