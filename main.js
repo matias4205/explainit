@@ -37,47 +37,52 @@ const mediaSVGs = {
 
 
 class ExplainIt {
-  normalizeStackNames = (stack) => stack.map((stackItem = '') => stackItem.toLowerCase())
+  normalizeStackNames = (stack) =>
+    stack.map((stackItem = "") => stackItem.toLowerCase());
 
   getStackHTML = (name) => {
-    const wrapIntoUl = (svg) => `<li class="stack__item">${svg}</li>`
+    const wrapIntoUl = (svg) => `<li class="stack__item">${svg}</li>`;
 
-    switch(name) {
-      case 'graphql':
+    switch (name) {
+      case "graphql":
         return wrapIntoUl(graphQlSVG);
-      case 'next' || 'nextjs':
-        return wrapIntoUl(nextSVG)
-      case 'react' || 'reactjs':
+      case "next" || "nextjs":
+        return wrapIntoUl(nextSVG);
+      case "react" || "reactjs":
         return wrapIntoUl(reactSVG);
-      case 'gatsby' || 'gatsbyjs':
+      case "gatsby" || "gatsbyjs":
         return wrapIntoUl(gatsbySVG);
     }
-  }
+  };
 
   getMediaHTML = (mediaKey, value) => {
-    const wrapIntoAnchor = (svg) => `<a class="media__item" href="${value}">${svg}</a>`
+    const wrapIntoAnchor = (svg) =>
+      `<a class="media__item" href="${value}">${svg}</a>`;
     console.log({ mediaKey, value });
-    return wrapIntoAnchor(mediaSVGs[mediaKey])
-  }
+    return wrapIntoAnchor(mediaSVGs[mediaKey]);
+  };
 
-  renderStack = (stack = []) => this.normalizeStackNames(stack).reduce((prev, stackItem) => prev + this.getStackHTML(stackItem), '')
+  renderStack = (stack = []) =>
+    this.normalizeStackNames(stack).reduce(
+      (prev, stackItem) => prev + this.getStackHTML(stackItem),
+      ""
+    );
 
-  renderMedia = (media) => Object.keys(media)
-    .filter(mediaKey => Boolean(media[mediaKey]))
-    .reduce((prev, mediaKey) => prev + this.getMediaHTML(mediaKey, media[mediaKey]), '')
-    /* .forEach((mediaKey) => {
+  renderMedia = (media) =>
+    Object.keys(media)
+      .filter((mediaKey) => Boolean(media[mediaKey]))
+      .reduce(
+        (prev, mediaKey) => prev + this.getMediaHTML(mediaKey, media[mediaKey]),
+        ""
+      );
+  /* .forEach((mediaKey) => {
       console.log({mediaKey, value: media[mediaKey]});
     }) */
 
-  hasMedia = (media = {}) => Object.keys(media).some((mediaKey) => media[mediaKey])
+  hasMedia = (media = {}) =>
+    Object.keys(media).some((mediaKey) => media[mediaKey]);
 
-  getWidgetHTML = ({
-    title,
-    shortDescription,
-    description,
-    stack,
-    media,
-  }) => `
+  getWidgetHTML = ({ title, shortDescription, description, stack, media }) => `
     <div class="explainit">
       <div id="explainit__frame" class="explainit__frame">
         <div class="frame__inner">
@@ -86,21 +91,23 @@ class ExplainIt {
             <div class="header__content">
               <h1 class="title">${title}</h1>
               ${
-                shortDescription.length > 0 ? (`
+                shortDescription.length > 0
+                  ? `
                   <p class="shortDescription">
                     ${shortDescription}
                   </p>
-                `) : ''
+                `
+                  : ""
               }
             </div>
           </div>
           <div class="content">
             <div class="content__inner">
               ${
-                stack.length > 0 ? (
-                  `<div class="card">
+                stack.length > 0
+                  ? `<div class="card">
                       <div class="card__head">
-                        <h3>Stack</h3>
+                        <h2>Stack</h2>
                       </div>
                       <div class="card__content">
                         <ul class="stack">
@@ -108,22 +115,27 @@ class ExplainIt {
                         </ul>
                       </div>
                     </div>`
-                ) : ''
+                  : ""
               }
               ${
-                description.length > 0 ? (`
+                description.length > 0
+                  ? `
                   <div class="card">
                     <div class="card__head">
-                      <h3>Description</h3>
+                      <h2>Description</h2>
                     </div>
                     <div class="card__content">
-                      ${description}
+                      <div class="description">
+                        ${description}
+                      </div>
                     </div>
                   </div>
-                `) : ''
+                `
+                  : ""
               }
               ${
-                this.hasMedia(media) ? (`
+                this.hasMedia(media)
+                  ? `
                   <div class="card">
                     <div class="card__content">
                       <ul class="media">
@@ -131,26 +143,27 @@ class ExplainIt {
                       </ul>
                     </div>
                   </div>
-                `) : ''
+                `
+                  : ""
               }
             </div>
           </div>
         </div>
       </div>
       <div id="explainit__launcher" class="explainit__launcher">
-        <svg xmlns="http://www.w3.org/2000/svg" width="23.73" height="5.405" viewBox="0 0 23.73 5.405">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 23.73 5.405">
           <path id="more"
             d="M1.9-2.426A2.7,2.7,0,0,1,2.624-4.4a2.628,2.628,0,0,1,1.964-.738A2.628,2.628,0,0,1,6.552-4.4a2.7,2.7,0,0,1,.725,1.978A2.654,2.654,0,0,1,6.552-.461,2.654,2.654,0,0,1,4.588.264,2.654,2.654,0,0,1,2.624-.461,2.654,2.654,0,0,1,1.9-2.426Zm9.176,0A2.7,2.7,0,0,1,11.8-4.4a2.628,2.628,0,0,1,1.964-.738,2.628,2.628,0,0,1,1.964.738,2.7,2.7,0,0,1,.725,1.978,2.654,2.654,0,0,1-.725,1.964,2.654,2.654,0,0,1-1.964.725A2.654,2.654,0,0,1,11.8-.461,2.654,2.654,0,0,1,11.074-2.426Zm9.176,0A2.7,2.7,0,0,1,20.975-4.4a2.628,2.628,0,0,1,1.964-.738A2.628,2.628,0,0,1,24.9-4.4a2.7,2.7,0,0,1,.725,1.978A2.654,2.654,0,0,1,24.9-.461a2.654,2.654,0,0,1-1.964.725,2.654,2.654,0,0,1-1.964-.725A2.654,2.654,0,0,1,20.25-2.426Z"
             transform="translate(-1.898 5.142)" fill="var(--green-900)" />
         </svg>
       </div>
     </div>
-  `
+  `;
 
   constructor({
-    title = '',
-    shortDescription = '',
-    description = '',
+    title = "",
+    shortDescription = "",
+    description = "",
     stack = [],
     rootElm = null,
     media = {
@@ -158,13 +171,13 @@ class ExplainIt {
       linkedIn: null,
       twitter: null,
       facebook: null,
-    }
+    },
   } = {}) {
     this.title = title;
     this.shortDescription = shortDescription;
     this.description = description;
     this.stack = stack;
-    this.rootElm = rootElm || document.querySelector('body');
+    this.rootElm = rootElm || document.querySelector("body");
     this.media = {
       website: media.website,
       linkedIn: media.linkedIn,
@@ -176,25 +189,28 @@ class ExplainIt {
   }
 
   initWidget() {
-    this.rootElm.innerHTML = this.getWidgetHTML({
-      title: this.title,
-      shortDescription: this.shortDescription,
-      description: this.description,
-      stack: this.stack,
-      media: {
-        website: this.media.website,
-        linkedIn: this.media.linkedIn,
-        twitter: this.media.twitter,
-        facebook: this.media.facebook,
-      }
+    this.rootElm.insertAdjacentHTML(
+      "beforeend",
+      this.getWidgetHTML({
+        title: this.title,
+        shortDescription: this.shortDescription,
+        description: this.description,
+        stack: this.stack,
+        media: {
+          website: this.media.website,
+          linkedIn: this.media.linkedIn,
+          twitter: this.media.twitter,
+          facebook: this.media.facebook,
+        },
+      })
+    );
+
+    const trigger = document.getElementById("explainit__launcher");
+    const content = document.getElementById("explainit__frame");
+
+    trigger.addEventListener("click", () => {
+      content.classList.toggle("explainit__frame--opened");
     });
-
-    const trigger = document.getElementById('explainit__launcher')
-    const content = document.getElementById('explainit__frame')
-
-    trigger.addEventListener('click', () => {
-      content.classList.toggle('explainit__frame--opened')
-    })
   }
 }
 
@@ -222,14 +238,10 @@ const explainit = new ExplainIt({
         🔍 Cypress
       </li>
     </ul>
-    <br/>
-
     <h3>¿Que puedo hacer con Petgram?</h3>
     <p>
       Con Petgram podés crearte una cuenta y likear todas las publicaciones de gatitos que quieras 😉.
     </p>
-
-    <br/>
     <h3>¿Dónde puedo verla?</h3>
     <p>Justo aca 👉 <a href="https://petgram-seven-ochre.vercel.app">https://petgram-seven-ochre.vercel.app</a></p>
   `,

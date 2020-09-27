@@ -15,6 +15,7 @@
   --gray-700: #808080;
   --gray-900: #393939;
   
+  --link-blue: #2222EC;
   --black: #000000;
   --white: #FFFFFF;
 
@@ -91,7 +92,7 @@
   position: relative;
   background: linear-gradient(to bottom, var(--green-500), var(--green-700));
   width: 100%;
-  padding: 20px 28px;
+  padding: 25px 28px;
   padding-bottom: 60px;
 }
 
@@ -147,7 +148,7 @@
   border-radius: var(--border-radius-md);
 }
 
-.card__head h3 {
+.card__head h2 {
   font-weight: 600;
 }
 
@@ -212,6 +213,11 @@
   fill: var(--gray-300);
 }
 
+.media__item:hover svg {
+  width: 18px;
+  fill: var(--gray-700);
+}
+
 .media__item:first-child {
   margin-left: 0;
 }
@@ -220,6 +226,39 @@
   margin-right: 0;
 }
 
+/* Description styles */
+.description h1,
+.description h2,
+.description h3,
+.description h4,
+.description h5,
+.description h6 {
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.description h1,
+.description h2,
+.description h3 {
+  margin-top: 14px;
+}
+
+.description ul {
+  margin-bottom: 12px;
+  padding-left: 1.7rem;
+  list-style-type: disc;
+}
+
+.description a,
+.description a:visited {
+  color: var(--link-blue);
+}
+
+.description p {
+  margin-bottom: 8px;
+}
+
+/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
