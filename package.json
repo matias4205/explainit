@@ -13,11 +13,13 @@
     "@babel/preset-env": "^7.11.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "css-loader": "^4.3.0",
+    "html-webpack-plugin": "^4.5.0",
     "standard": "^14.3.4",
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "dev": "webpack-dev-server --history-api-fallback",
+    "dev": "webpack-dev-server",
     "build": "webpack --mode production",
     "serve:dev": "webpack --mode development && npx serve -s dist",
     "lint": "eslint src/*.js"
@@ -28,6 +30,8 @@
   "author": "matias4205",
   "license": "MIT",
   "standard": {
-    "ignore": ["dist"]
+    "ignore": [
+      "dist"
+    ]
   }
 }
