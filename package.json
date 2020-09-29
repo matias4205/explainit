@@ -3,12 +3,31 @@
   "version": "1.0.0",
   "description": "Simplifing the way you explain your projects",
   "main": "index.js",
+  "dependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "standard": "^14.3.4",
+    "webpack-dev-server": "^3.11.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server --history-api-fallback",
+    "build": "webpack --mode production",
+    "serve:dev": "webpack --mode development && npx serve -s dist",
+    "lint": "eslint src/*.js"
   },
   "keywords": [
     "js"
   ],
   "author": "matias4205",
-  "license": "MIT"
+  "license": "MIT",
+  "standard": {
+    "ignore": ["dist"]
+  }
 }

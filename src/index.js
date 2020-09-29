@@ -35,37 +35,36 @@ const mediaSVGs = {
   </svg>`
 }
 
-
 class ExplainIt {
   normalizeStackNames = (stack) =>
-    stack.map((stackItem = "") => stackItem.toLowerCase());
+    stack.map((stackItem = '') => stackItem.toLowerCase());
 
   getStackHTML = (name) => {
-    const wrapIntoUl = (svg) => `<li class="stack__item">${svg}</li>`;
+    const wrapIntoUl = (svg) => `<li class="stack__item">${svg}</li>`
 
     switch (name) {
-      case "graphql":
-        return wrapIntoUl(graphQlSVG);
-      case "next" || "nextjs":
-        return wrapIntoUl(nextSVG);
-      case "react" || "reactjs":
-        return wrapIntoUl(reactSVG);
-      case "gatsby" || "gatsbyjs":
-        return wrapIntoUl(gatsbySVG);
+      case 'graphql':
+        return wrapIntoUl(graphQlSVG)
+      case 'next' || 'nextjs':
+        return wrapIntoUl(nextSVG)
+      case 'react' || 'reactjs':
+        return wrapIntoUl(reactSVG)
+      case 'gatsby' || 'gatsbyjs':
+        return wrapIntoUl(gatsbySVG)
     }
   };
 
   getMediaHTML = (mediaKey, value) => {
     const wrapIntoAnchor = (svg) =>
-      `<a class="media__item" target="_blank" href="${value}">${svg}</a>`;
+      `<a class="media__item" target="_blank" href="${value}">${svg}</a>`
 
-    return wrapIntoAnchor(mediaSVGs[mediaKey]);
+    return wrapIntoAnchor(mediaSVGs[mediaKey])
   };
 
   renderStack = (stack = []) =>
     this.normalizeStackNames(stack).reduce(
       (prev, stackItem) => prev + this.getStackHTML(stackItem),
-      ""
+      ''
     );
 
   renderMedia = (media) =>
@@ -73,7 +72,7 @@ class ExplainIt {
       .filter((mediaKey) => Boolean(media[mediaKey]))
       .reduce(
         (prev, mediaKey) => prev + this.getMediaHTML(mediaKey, media[mediaKey]),
-        ""
+        ''
       );
 
   hasMedia = (media = {}) =>
@@ -94,7 +93,7 @@ class ExplainIt {
                     ${shortDescription}
                   </p>
                 `
-                  : ""
+                  : ''
               }
             </div>
           </div>
@@ -112,7 +111,7 @@ class ExplainIt {
                         </ul>
                       </div>
                     </div>`
-                  : ""
+                  : ''
               }
               ${
                 description.length > 0
@@ -128,7 +127,7 @@ class ExplainIt {
                     </div>
                   </div>
                 `
-                  : ""
+                  : ''
               }
               ${
                 this.hasMedia(media)
@@ -141,7 +140,7 @@ class ExplainIt {
                     </div>
                   </div>
                 `
-                  : ""
+                  : ''
               }
             </div>
           </div>
@@ -168,48 +167,49 @@ class ExplainIt {
     </div>
   `;
 
-  constructor({
-    title = "",
-    shortDescription = "",
-    description = "",
+  constructor ({
+    title = '',
+    shortDescription = '',
+    description = '',
     stack = [],
     rootElm = null,
     media = {
       website: null,
       linkedIn: null,
       twitter: null,
-      facebook: null,
-    },
+      facebook: null
+    }
   } = {}) {
-    this.title = title;
-    this.shortDescription = shortDescription;
-    this.description = description;
-    this.stack = stack;
-    this.rootElm = rootElm || document.querySelector("body");
+    this.title = title
+    this.shortDescription = shortDescription
+    this.description = description
+    this.stack = stack
+    this.rootElm = rootElm || document.querySelector('body')
     this.media = {
       website: media.website,
       linkedIn: media.linkedIn,
       twitter: media.twitter,
-      facebook: media.facebook,
-    };
+      facebook: media.facebook
+    }
 
-    this.isOpen = false;
+    this.isOpen = false
 
-    this._initWidget();
+    this._initWidget()
   }
 
-  _render() {
-    this._removePreviousNode();
-    this._initWidget();
+  _render () {
+    this._removePreviousNode()
+    this._initWidget()
   };
 
-  _removePreviousNode() {
-    document.getElementById("explainit")?.remove();
+  _removePreviousNode () {
+    // eslint-disable-next-line no-unused-expressions
+    document.getElementById('explainit')?.remove()
   }
 
-  _initWidget() {
+  _initWidget () {
     this.rootElm.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       this.getWidgetHTML({
         title: this.title,
         shortDescription: this.shortDescription,
@@ -219,31 +219,31 @@ class ExplainIt {
           website: this.media.website,
           linkedIn: this.media.linkedIn,
           twitter: this.media.twitter,
-          facebook: this.media.facebook,
-        },
+          facebook: this.media.facebook
+        }
       })
-    );
+    )
 
-    const trigger = document.getElementById("explainit__launcher");
+    const trigger = document.getElementById('explainit__launcher')
     // const content = document.getElementById("explainit__frame");
 
-    trigger.addEventListener("click", () => {
-      this.toggle();
-    });
+    trigger.addEventListener('click', () => {
+      this.toggle()
+    })
   }
 
-  close() {
-    this.isOpen = false;
-    this._render();
+  close () {
+    this.isOpen = false
+    this._render()
   }
 
-  open() {
-    this.isOpen = true;
-    this._render();
+  open () {
+    this.isOpen = true
+    this._render()
   }
 
-  toggle() {
-    this.isOpen ? this.close() : this.open();
+  toggle () {
+    this.isOpen ? this.close() : this.open()
   }
 }
 
@@ -282,5 +282,7 @@ const explainit = new ExplainIt({
     website: 'https://mtprz.dev',
     twitter: 'https://twitter.com/matiasperz_',
     linkedIn: 'https://www.linkedin.com/in/matias-sebastian-perez-24012b180/'
-  },
-});
+  }
+})
+
+explainit.open()
