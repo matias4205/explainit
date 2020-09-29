@@ -21,10 +21,12 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack --mode production",
+    "build:stack": "node src/scripts/buildStackIconsEntry",
     "serve:dev": "webpack --mode development && npx serve -s dist",
     "lint": "eslint src/*.js"
   },
   "keywords": [
+    "explainit",
     "js"
   ],
   "author": "matias4205",
