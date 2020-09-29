@@ -57,8 +57,8 @@ class ExplainIt {
 
   getMediaHTML = (mediaKey, value) => {
     const wrapIntoAnchor = (svg) =>
-      `<a class="media__item" href="${value}">${svg}</a>`;
-    console.log({ mediaKey, value });
+      `<a class="media__item" target="_blank" href="${value}">${svg}</a>`;
+
     return wrapIntoAnchor(mediaSVGs[mediaKey]);
   };
 
@@ -75,16 +75,13 @@ class ExplainIt {
         (prev, mediaKey) => prev + this.getMediaHTML(mediaKey, media[mediaKey]),
         ""
       );
-  /* .forEach((mediaKey) => {
-      console.log({mediaKey, value: media[mediaKey]});
-    }) */
 
   hasMedia = (media = {}) =>
     Object.keys(media).some((mediaKey) => media[mediaKey]);
 
   getWidgetHTML = ({ title, shortDescription, description, stack, media }) => `
-    <div class="explainit">
-      <div id="explainit__frame" class="explainit__frame">
+    <div id="explainit" class="explainit">
+      <div id="explainit__frame" class="explainit__frame${this.isOpen ? ' explainit__frame--opened' : ''}">
         <div class="frame__inner">
           <div class="header">
             <div class="header__overlay"></div>
@@ -125,9 +122,9 @@ class ExplainIt {
                       <h2>Description</h2>
                     </div>
                     <div class="card__content">
-                      <div class="description">
+                      <article class="description">
                         ${description}
-                      </div>
+                      </article>
                     </div>
                   </div>
                 `
@@ -151,11 +148,22 @@ class ExplainIt {
         </div>
       </div>
       <div id="explainit__launcher" class="explainit__launcher">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 23.73 5.405">
-          <path id="more"
-            d="M1.9-2.426A2.7,2.7,0,0,1,2.624-4.4a2.628,2.628,0,0,1,1.964-.738A2.628,2.628,0,0,1,6.552-4.4a2.7,2.7,0,0,1,.725,1.978A2.654,2.654,0,0,1,6.552-.461,2.654,2.654,0,0,1,4.588.264,2.654,2.654,0,0,1,2.624-.461,2.654,2.654,0,0,1,1.9-2.426Zm9.176,0A2.7,2.7,0,0,1,11.8-4.4a2.628,2.628,0,0,1,1.964-.738,2.628,2.628,0,0,1,1.964.738,2.7,2.7,0,0,1,.725,1.978,2.654,2.654,0,0,1-.725,1.964,2.654,2.654,0,0,1-1.964.725A2.654,2.654,0,0,1,11.8-.461,2.654,2.654,0,0,1,11.074-2.426Zm9.176,0A2.7,2.7,0,0,1,20.975-4.4a2.628,2.628,0,0,1,1.964-.738A2.628,2.628,0,0,1,24.9-4.4a2.7,2.7,0,0,1,.725,1.978A2.654,2.654,0,0,1,24.9-.461a2.654,2.654,0,0,1-1.964.725,2.654,2.654,0,0,1-1.964-.725A2.654,2.654,0,0,1,20.25-2.426Z"
-            transform="translate(-1.898 5.142)" fill="var(--green-900)" />
-        </svg>
+        ${
+          this.isOpen ? (`
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 25.34 15.499">
+              <g id="arrow" transform="translate(-25.672 -607.672)">
+                <line id="Línea_1" data-name="Línea 1" x2="9.842" y2="9.842" transform="translate(28.5 610.5)" fill="none" stroke="var(--green-900)" stroke-linecap="round" stroke-width="4"/>
+                <line id="Línea_2" data-name="Línea 2" x1="9.842" y2="9.842" transform="translate(38.342 610.5)" fill="none" stroke="var(--green-900)" stroke-linecap="round" stroke-width="4"/>
+              </g>
+            </svg>
+          `) : (`
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 23.73 5.405">
+              <path id="more"
+                d="M1.9-2.426A2.7,2.7,0,0,1,2.624-4.4a2.628,2.628,0,0,1,1.964-.738A2.628,2.628,0,0,1,6.552-4.4a2.7,2.7,0,0,1,.725,1.978A2.654,2.654,0,0,1,6.552-.461,2.654,2.654,0,0,1,4.588.264,2.654,2.654,0,0,1,2.624-.461,2.654,2.654,0,0,1,1.9-2.426Zm9.176,0A2.7,2.7,0,0,1,11.8-4.4a2.628,2.628,0,0,1,1.964-.738,2.628,2.628,0,0,1,1.964.738,2.7,2.7,0,0,1,.725,1.978,2.654,2.654,0,0,1-.725,1.964,2.654,2.654,0,0,1-1.964.725A2.654,2.654,0,0,1,11.8-.461,2.654,2.654,0,0,1,11.074-2.426Zm9.176,0A2.7,2.7,0,0,1,20.975-4.4a2.628,2.628,0,0,1,1.964-.738A2.628,2.628,0,0,1,24.9-4.4a2.7,2.7,0,0,1,.725,1.978A2.654,2.654,0,0,1,24.9-.461a2.654,2.654,0,0,1-1.964.725,2.654,2.654,0,0,1-1.964-.725A2.654,2.654,0,0,1,20.25-2.426Z"
+                transform="translate(-1.898 5.142)" fill="var(--green-900)" />
+            </svg>
+          `)
+        }
       </div>
     </div>
   `;
@@ -185,10 +193,21 @@ class ExplainIt {
       facebook: media.facebook,
     };
 
-    this.initWidget();
+    this.isOpen = false;
+
+    this._initWidget();
   }
 
-  initWidget() {
+  _render() {
+    this._removePreviousNode();
+    this._initWidget();
+  };
+
+  _removePreviousNode() {
+    document.getElementById("explainit")?.remove();
+  }
+
+  _initWidget() {
     this.rootElm.insertAdjacentHTML(
       "beforeend",
       this.getWidgetHTML({
@@ -206,18 +225,32 @@ class ExplainIt {
     );
 
     const trigger = document.getElementById("explainit__launcher");
-    const content = document.getElementById("explainit__frame");
+    // const content = document.getElementById("explainit__frame");
 
     trigger.addEventListener("click", () => {
-      content.classList.toggle("explainit__frame--opened");
+      this.toggle();
     });
+  }
+
+  close() {
+    this.isOpen = false;
+    this._render();
+  }
+
+  open() {
+    this.isOpen = true;
+    this._render();
+  }
+
+  toggle() {
+    this.isOpen ? this.close() : this.open();
   }
 }
 
 const explainit = new ExplainIt({
   title: 'Petgram',
   shortDescription: 'Petgram es una aplicación realizada en el curso de React Avanzado en Platzi. Es una aplicación similar a Instagram con el detalle que las imágenes que se muestran son de mascotas.',
-  stack: ['graphql', 'react' ],
+  stack: ['graphql', 'react'],
   description: `
     <p>
       Petgram es una PWA(Progressive Web App) de aspecto similar a instagram donde podés encontrar fotos de
