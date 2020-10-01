@@ -269,3 +269,24 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 460px) {
+  .explainit {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  .explainit__frame {
+    width: 100vw;
+    max-height: none;
+    flex: 1;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
+  /* .explainit__launcher {
+    display: none;
+  } */
+}
