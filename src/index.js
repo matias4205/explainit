@@ -2,10 +2,10 @@ import './loadStyles'
 import stackIcons from './stackIcons'
 
 import { capitalize } from './utils'
-import { angleDown, more, facebook, website, linkedIn, twitter } from './icons'
+import { angleDown, more, facebook, website, linkedIn, twitter, close, github } from './icons'
 
 /* Media SVGs */
-const mediaSVGs = { facebook, website, linkedIn, twitter }
+const mediaSVGs = { facebook, website, linkedIn, twitter, github }
 
 class ExplainIt {
   _normalizeStackNames = (stack) =>
@@ -99,7 +99,10 @@ class ExplainIt {
       <div id="explainit__frame" class="explainit__frame${this.isOpen ? ' explainit__frame--opened' : ''}">
         <div class="frame__inner">
           <div class="header">
-            <div class="header__overlay"></div>
+            <button id="explainit__close" class="header__close">
+              ${close}
+            </button>
+            <div class="header__bg"></div>
             <div class="header__content">
               <h1 class="title">${title}</h1>
               ${this._renderShortDescription(shortDescription)}
@@ -114,7 +117,7 @@ class ExplainIt {
           </div>
         </div>
       </div>
-      <div id="explainit__launcher" class="explainit__launcher">
+      <div id="explainit__launcher" class="explainit__launcher ${this.isOpen ? ' explainit__launcher--open' : ''}">
         ${this.isOpen ? (angleDown) : (more)}
       </div>
     </div>
@@ -130,7 +133,8 @@ class ExplainIt {
       website: null,
       linkedIn: null,
       twitter: null,
-      facebook: null
+      facebook: null,
+      github: null
     }
   } = {}) {
     this.title = title
@@ -142,7 +146,8 @@ class ExplainIt {
       website: media.website,
       linkedIn: media.linkedIn,
       twitter: media.twitter,
-      facebook: media.facebook
+      facebook: media.facebook,
+      github: media.github
     }
 
     this.isOpen = false
@@ -172,16 +177,22 @@ class ExplainIt {
           website: this.media.website,
           linkedIn: this.media.linkedIn,
           twitter: this.media.twitter,
-          facebook: this.media.facebook
+          facebook: this.media.facebook,
+          github: this.media.github
         }
       })
     )
 
-    const trigger = document.getElementById('explainit__launcher')
+    const launcher = document.getElementById('explainit__launcher')
+    const mobileClose = document.getElementById('explainit__close')
     // const content = document.getElementById("explainit__frame");
 
-    trigger.addEventListener('click', () => {
+    launcher.addEventListener('click', () => {
       this.toggle()
+    })
+
+    mobileClose.addEventListener('click', () => {
+      this.close()
     })
   }
 
@@ -202,7 +213,7 @@ class ExplainIt {
 
 const explainit = new ExplainIt({
   title: 'Petgram',
-  shortDescription: 'Petgram es una aplicación realizada en el curso de React Avanzado en Platzi. Es una aplicación similar a Instagram con el detalle que las imágenes que se muestran son de mascotas.',
+  shortDescription: 'Petgram es una aplicación realizada en el curso de React Avanzado en Platzi. Es una aplicación similar a Instagram con el detalle que las imágenes que se muestran son de mascotas 🐶.',
   stack: ['graphql', 'react', 'redwood', 'next'],
   description: `
     <p>
@@ -234,8 +245,9 @@ const explainit = new ExplainIt({
   media: {
     website: 'https://mtprz.dev',
     twitter: 'https://twitter.com/matiasperz_',
-    linkedIn: 'https://www.linkedin.com/in/matias-sebastian-perez-24012b180/'
+    linkedIn: 'https://www.linkedin.com/in/matias-sebastian-perez-24012b180/',
+    github: 'https://github.com/matias4205'
   }
 })
 
-explainit.open()
+// explainit.open()
