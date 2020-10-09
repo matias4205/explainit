@@ -1,4 +1,5 @@
-import './loadStyles'
+/* eslint-disable import/no-webpack-loader-syntax */
+import styles from './loadStyles'
 import stackIcons from './stackIcons'
 
 import { capitalize } from './utils'
@@ -12,7 +13,7 @@ class ExplainIt {
     stack.map((stackItem = '') => stackItem.toLowerCase());
 
   _getStackHTML = (name) => {
-    const wrapIntoUl = (svg) => `<li class="stack__item" title="${capitalize(name)}">${svg}</li>`
+    const wrapIntoUl = (svg) => `<li class="${styles.stack__item}" title="${capitalize(name)}">${svg}</li>`
     const matchingStack = stackIcons[Object.keys(stackIcons).find((stackKey) => stackIcons[stackKey].test(name))]
 
     if (!matchingStack) return null
@@ -22,7 +23,7 @@ class ExplainIt {
 
   _getMediaHTML = (mediaKey, value) => {
     const wrapIntoAnchor = (svg) =>
-      `<a class="media__item" target="_blank" href="${value}">${svg}</a>`
+      `<a class="${styles.media__item}" target="_blank" href="${value}">${svg}</a>`
 
     return wrapIntoAnchor(mediaSVGs[mediaKey])
   };
@@ -46,12 +47,12 @@ class ExplainIt {
 
   _renderStackCard = (stack) => (
     stack.length > 0 ? (
-      `<div class="card">
-        <div class="card__head">
+      `<div class="${styles.card}">
+        <div class="${styles.card__head}">
           <h2>Stack</h2>
         </div>
-        <div class="card__content">
-          <ul class="stack">
+        <div class="${styles.card__content}">
+          <ul class="${styles.stack}">
             ${this._renderStack(stack)}
           </ul>
         </div>
@@ -61,12 +62,12 @@ class ExplainIt {
 
   _renderDescriptionCard = (description) => (
     description.length > 0 ? (
-      `<div class="card">
-        <div class="card__head">
+      `<div class="${styles.card}">
+        <div class="${styles.card__head}">
           <h2>Description</h2>
         </div>
-        <div class="card__content">
-          <article class="description">
+        <div class="${styles.card__content}">
+          <article class="${styles.description}">
             ${description}
           </article>
         </div>
@@ -76,9 +77,9 @@ class ExplainIt {
 
   _renderMediaCard = (media) => (
     this._hasMedia(media) ? (
-      `<div class="card">
-        <div class="card__content">
-          <ul class="media">
+      `<div class="${styles.card}">
+        <div class="${styles.card__content}">
+          <ul class="${styles.media}">
             ${this._renderMedia(media)}
           </ul>
         </div>
@@ -88,7 +89,7 @@ class ExplainIt {
 
   _renderShortDescription = (shortDescription) => (
     shortDescription.length > 0 ? (
-      `<p class="shortDescription">
+      `<p class="${styles.shortDescription}">
           ${shortDescription}
         </p>`
     ) : ''
@@ -97,19 +98,19 @@ class ExplainIt {
   getWidgetHTML = ({ title, shortDescription, description, stack, media }) => `
     <div id="explainit" class="explainit">
       <div id="explainit__frame" class="explainit__frame${this.isOpen ? ' explainit__frame--opened' : ''}">
-        <div class="frame__inner">
-          <div class="header">
-            <button id="explainit__close" class="header__close">
-              ${close}
-            </button>
-            <div class="header__bg"></div>
-            <div class="header__content">
-              <h1 class="title">${title}</h1>
+        <button id="explainit__close" class="${styles.header__close}">
+          ${close}
+        </button>
+        <div class="${styles.frame__inner}">
+          <div class="${styles.header}">
+            <div class="${styles.header__bg}"></div>
+            <div class="${styles.header__content}">
+              <h1 class="${styles.title}">${title}</h1>
               ${this._renderShortDescription(shortDescription)}
             </div>
           </div>
-          <div class="content">
-            <div class="content__inner">
+          <div class="${styles.content}">
+            <div class="${styles.content__inner}">
               ${this._renderStackCard(stack)}
               ${this._renderDescriptionCard(description)}
               ${this._renderMediaCard(media)}
@@ -250,4 +251,4 @@ const explainit = new ExplainIt({
   }
 })
 
-// explainit.open()
+explainit.open()

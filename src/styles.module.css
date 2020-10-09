@@ -32,13 +32,13 @@
   --background: --var(--gray-100);
 }
 
-#main {
+:global(#main) {
   width: 100%;
   height: 100vh;
   background-color: var(--background);
 }
 
-.explainit {
+:global(.explainit) {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -49,7 +49,7 @@
   font-family: 'Nunito Sans';
 }
 
-.explainit__frame {
+:global(.explainit__frame) {
   display: none;
   height: calc(100vh - 120px);
   min-height: 256px;
@@ -60,10 +60,12 @@
   margin-bottom: 20px;
   width: 360px;
   overflow: hidden;
-  animation: .3s fadeInUp forwards;
+  animation-duration: .3s;
+  animation-name: fadeInUp;
+  animation-fill-mode: forwards;
 }
 
-.explainit__frame--opened {
+:global(.explainit__frame--opened) {
   display: block;
 }
 
@@ -164,7 +166,7 @@
   font-size: 15px;
 }
 
-.explainit__launcher {
+:global(.explainit__launcher) {
   cursor: pointer;
   display: flex;
   width: 60px;
@@ -280,25 +282,25 @@
 }
 
 @media (max-width: 460px) {
-  .explainit {
+  :global(.explainit) {
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
   }
 
-  .explainit__launcher {
+  :global(.explainit__launcher) {
     width: 50px;
     height: 50px;
     margin-bottom: 14px;
     margin-right: 14px;
   }
 
-  .explainit__launcher svg {
+  :global(.explainit__launcher) svg {
     width: 20px;
   }
 
-  .explainit__frame {
+  :global(.explainit__frame) {
     width: 100vw;
     flex-basis: 100%;
     max-height: none;
@@ -307,7 +309,7 @@
     margin-bottom: 0;
   }
 
-  .explainit__launcher.explainit__launcher--open {
+  :global(.explainit__launcher.explainit__launcher--open) {
     display: none;
   }
 
