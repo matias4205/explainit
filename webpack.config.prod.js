@@ -1,10 +1,10 @@
 module.exports = {
   mode: 'production',
   entry: {
-    app: './src/index.js'
+    app: './src/explainit.js'
   },
   output: {
-    filename: 'app.bundle.js',
+    filename: 'explainit.min.js',
     publicPath: 'dist'
   },
   module: {

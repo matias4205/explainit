@@ -1,4 +1,4 @@
-import ExplainIt from './index'
+import ExplainIt from './explainit'
 
 const explainit = new ExplainIt({
   title: 'Petgram',

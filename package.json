@@ -1,6 +1,6 @@
 {
   "name": "explainit",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Simplifing the way you explain your projects",
   "main": "index.js",
   "dependencies": {
@@ -19,10 +19,10 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
+    "prepublish": "npm run build",
     "dev": "webpack-dev-server --config ./webpack.config.dev.js",
     "build": "webpack --config ./webpack.config.prod.js",
     "build:stack": "node src/scripts/buildStackIconsEntry",
-    "serve:dev": "webpack --mode development && npx serve -s dist",
     "lint": "eslint src/*.js"
   },
   "keywords": [
