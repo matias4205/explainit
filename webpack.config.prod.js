@@ -1,15 +1,19 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 module.exports = {
-  output: {
-    filename: 'app.bundle.js',
-    publicPath: '/'
+  mode: 'production',
+  target: 'web',
+  entry: {
+    app: './index.js'
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    })
-  ],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'explainit.js',
+    library: 'ExplainIt',
+    libraryTarget: 'umd',
+    /* Makes the default export of the entry point the root content of the library */
+    libraryExport: 'default'
+  },
   module: {
     rules: [
       {

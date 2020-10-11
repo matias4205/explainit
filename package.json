@@ -1,12 +1,8 @@
 {
   "name": "explainit",
-  "version": "1.0.0",
+  "version": "0.0.4",
   "description": "Simplifing the way you explain your projects",
   "main": "index.js",
-  "dependencies": {
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
-  },
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
@@ -16,13 +12,15 @@
     "css-loader": "^4.3.0",
     "html-webpack-plugin": "^4.5.0",
     "standard": "^14.3.4",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack --mode production",
+    "prepublish": "npm run build",
+    "dev": "webpack-dev-server --config ./webpack.config.dev.js",
+    "build": "webpack --config ./webpack.config.prod.js",
     "build:stack": "node src/scripts/buildStackIconsEntry",
-    "serve:dev": "webpack --mode development && npx serve -s dist",
     "lint": "eslint src/*.js"
   },
   "keywords": [
@@ -33,7 +31,7 @@
   "license": "MIT",
   "standard": {
     "ignore": [
-      "dist"
+      "./dist"
     ]
   }
 }
