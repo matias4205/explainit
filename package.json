@@ -1,6 +1,6 @@
 {
   "name": "explainit",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simplifing the way you explain your projects",
   "main": "index.js",
   "devDependencies": {
