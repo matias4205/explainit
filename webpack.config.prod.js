@@ -1,11 +1,18 @@
+const path = require('path')
+
 module.exports = {
   mode: 'production',
+  target: 'web',
   entry: {
-    app: './src/explainit.js'
+    app: './index.js'
   },
   output: {
-    filename: 'explainit.min.js',
-    publicPath: 'dist'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'explainit.js',
+    library: 'ExplainIt',
+    libraryTarget: 'umd',
+    /* Makes the default export of the entry point the root content of the library */
+    libraryExport: 'default'
   },
   module: {
     rules: [

@@ -8,7 +8,7 @@ import { angleDown, more, facebook, website, linkedIn, twitter, close, github } 
 /* Media SVGs */
 const mediaSVGs = { facebook, website, linkedIn, twitter, github }
 
-export default class ExplainIt {
+class ExplainIt {
   _normalizeStackNames = (stack) =>
     stack.map((stackItem = '') => stackItem.toLowerCase());
 
@@ -211,3 +211,5 @@ export default class ExplainIt {
     this.isOpen ? this.close() : this.open()
   }
 }
+
+export default ExplainIt
