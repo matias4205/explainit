@@ -1,4 +1,4 @@
-@import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
+/* @import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css"); */
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap');
 
 :root {
@@ -32,11 +32,90 @@
   --background: --var(--gray-100);
 }
 
-:global(#main) {
-  width: 100%;
-  height: 100vh;
-  background-color: var(--background);
+/* ----- START OF CSS-RESET ----- */
+
+:global(.explainit) p,
+:global(.explainit) ol,
+:global(.explainit) ul,
+:global(.explainit) li,
+:global(.explainit) dl,
+:global(.explainit) dt,
+:global(.explainit) dd,
+:global(.explainit) blockquote,
+:global(.explainit) figure,
+:global(.explainit) fieldset,
+:global(.explainit) legend,
+:global(.explainit) textarea,
+:global(.explainit) pre,
+:global(.explainit) iframe,
+:global(.explainit) hr,
+:global(.explainit) h1,
+:global(.explainit) h2,
+:global(.explainit) h3,
+:global(.explainit) h4,
+:global(.explainit) h5,
+:global(.explainit) h6 {
+  margin: 0;
+  padding: 0;
 }
+
+:global(.explainit) h1,
+:global(.explainit) h2,
+:global(.explainit) h3,
+:global(.explainit) h4,
+:global(.explainit) h5,
+:global(.explainit) h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+:global(.explainit) ul {
+  list-style: none;
+}
+
+:global(.explainit) button,
+:global(.explainit) input,
+:global(.explainit) select,
+:global(.explainit) textarea {
+  margin: 0;
+}
+
+:global(.explainit) * {
+  box-sizing: border-box !important;
+}
+
+:global(.explainit) *,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+:global(.explainit) img,
+:global(.explainit) video {
+  height: auto;
+  max-width: 100%;
+}
+
+:global(.explainit) iframe {
+  border: 0;
+}
+
+:global(.explainit) table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+:global(.explainit) td,
+:global(.explainit) th {
+  padding: 0;
+}
+
+:global(.explainit) td:not([align]),
+:global(.explainit) th:not([align]) {
+  text-align: left;
+}
+
+/* ----- END OF CSS-RESET ----- */
 
 :global(.explainit) {
   display: flex;
@@ -133,8 +212,8 @@
 }
 
 .title {
-  font-size: 34px;
-  font-weight: 700;
+  font-size: 34px !important;
+  font-weight: 700 !important;
   color: var(--white);
 }
 
@@ -186,7 +265,7 @@
 }
 
 .stack__item {
-  margin: 0 .4rem;
+  margin: 0 .4rem !important;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -197,11 +276,11 @@
 }
 
 .stack__item:first-child {
-  margin-left: 0;
+  margin-left: 0 !important;
 }
 
 .stack__item:last-child {
-  margin-right: 0;
+  margin-right: 0 !important;
 }
 
 .media {

@@ -5,10 +5,14 @@ import stackIcons from './stackIcons'
 import { capitalize } from './utils'
 import { angleDown, more, facebook, website, linkedIn, twitter, close, github } from './icons'
 
-/* Media SVGs */
 const mediaSVGs = { facebook, website, linkedIn, twitter, github }
 
 class ExplainIt {
+  _configCheck = (config) => {
+    if (!config.title) throw new Error('You must provide a title')
+    if (config.shortDescription.length > 150) console.warn('Your short description should have a maximum length of 150!')
+  }
+
   _normalizeStackNames = (stack) =>
     stack.map((stackItem = '') => stackItem.toLowerCase());
 
@@ -138,11 +142,20 @@ class ExplainIt {
       github: null
     }
   } = {}) {
+    this._configCheck({
+      title,
+      shortDescription,
+      description,
+      stack,
+      rootElm,
+      media
+    })
+
     this.title = title
     this.shortDescription = shortDescription
     this.description = description
     this.stack = stack
-    this.rootElm = rootElm || document.querySelector('body')
+    this.rootElm = rootElm || document.body
     this.media = {
       website: media.website,
       linkedIn: media.linkedIn,
