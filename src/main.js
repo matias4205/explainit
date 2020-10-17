@@ -2,7 +2,7 @@ import ExplainIt from './explainit'
 
 const explainit = new ExplainIt({
   title: 'Petgram',
-  shortDescription: 'Petgram es una aplicación realizada en el curso de React Avanzado en Platzi. Es una aplicación similar a Instagram con el detalle que las imágenes que se muestran son de mascotas 🐶.',
+  shortDescription: 'Petgram es una aplicación realizada en el curso de React Avanzado en Platzi. Las imágenes que se muestran son de mascotas 🐶.',
   stack: ['graphql', 'react', 'redwood', 'next'],
   description: `
     <p>
