@@ -184,7 +184,7 @@ class ExplainIt {
       github: media.github
     }
     this.theme = this._buildTheme({
-      primaryColor: themes.bittersweet
+      primaryColor: themes.turquoise
     })
 
     this.isOpen = false
