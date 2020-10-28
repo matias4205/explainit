@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap');
 
 :root {
-  --green-100: #CDF5EE;
-  --green-300: #91E9D9;
-  --green-500: #5FDEC7;
-  --green-700: #29CBAD;
-  --green-900: #1D8E79;
-  
   --gray-100: #F7F7F7;
   --gray-300: #D3D3D3;
   --gray-500: #C8C8C8;
@@ -115,7 +109,6 @@
 
 .header {
   position: relative;
-  background: linear-gradient(to bottom, var(--green-500), var(--green-700));
   width: 100%;
   padding: 25px 28px;
   padding-bottom: 60px;
@@ -138,7 +131,6 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background-image: var(--pattern-hideout);
   z-index: 1;
 }
 
@@ -210,7 +202,6 @@ p.shortDescription {
   justify-content: center;
   align-items: center;
   border-radius: var(--border-radius-full);
-  background-color: var(--green-500);
   box-shadow: var(--box-shadow-lg);
 }
 

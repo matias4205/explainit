@@ -1,13 +1,24 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 import styles from './loadStyles'
 import stackIcons from './stackIcons'
+import { themes, banners } from './config'
 
-import { capitalize } from './utils'
+import { capitalize, lightenDarkenColor } from './utils'
 import { angleDown, more, facebook, website, linkedIn, twitter, close, github } from './icons'
 
 const mediaSVGs = { facebook, website, linkedIn, twitter, github }
 
 class ExplainIt {
+  _buildTheme = ({ primaryColor }) => ({
+    primaryColor: {
+      100: lightenDarkenColor(primaryColor, 40),
+      300: lightenDarkenColor(primaryColor, 20),
+      500: lightenDarkenColor(primaryColor, 0),
+      700: lightenDarkenColor(primaryColor, -20),
+      900: lightenDarkenColor(primaryColor, -60)
+    }
+  })
+
   _configCheck = (config) => {
     if (!config.title) throw new Error('You must provide a title')
     if (config.shortDescription.length > 150) console.warn('Your short description should have a maximum length of 150!')
@@ -106,8 +117,11 @@ class ExplainIt {
           ${close}
         </button>
         <div class="${styles.frame__inner}">
-          <div class="${styles.header}">
-            <div class="${styles.header__bg}"></div>
+          <div
+            class="${styles.header}"
+            style="background: linear-gradient(to bottom, ${this.theme.primaryColor[500]}, ${this.theme.primaryColor[700]});"
+          >
+            <div class="${styles.header__bg}" style="${banners.hideout}"></div>
             <div class="${styles.header__content}">
               <h1 class="${styles.title}">${title}</h1>
               ${this._renderShortDescription(shortDescription)}
@@ -122,9 +136,15 @@ class ExplainIt {
           </div>
         </div>
       </div>
-      <div id="explainit__launcher" class="explainit__launcher ${this.isOpen ? ' explainit__launcher--open' : ''}">
-        ${this.isOpen ? (angleDown) : (more)}
-      </div>
+      <div
+        id="explainit__launcher"
+        class="explainit__launcher ${this.isOpen ? ' explainit__launcher--open' : ''}"
+        style="background-color: ${this.theme.primaryColor[500]};"
+      >
+        <span style="display: inherit; color: ${this.theme.primaryColor[900]}">
+          ${this.isOpen ? (angleDown) : (more)}
+        </span>
+        </div>
     </div>
   `;
 
@@ -163,6 +183,9 @@ class ExplainIt {
       facebook: media.facebook,
       github: media.github
     }
+    this.theme = this._buildTheme({
+      primaryColor: themes.bittersweet
+    })
 
     this.isOpen = false
 
