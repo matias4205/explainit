@@ -8,6 +8,4 @@ styleTag.innerHTML = strStyles
 
 document.head.appendChild(styleTag)
 
-export default {
-  ...styles.locals
-}
+export default styles.locals

@@ -3,8 +3,8 @@ import styles from './loadStyles'
 import stackIcons from './stackIcons'
 import { themes, banners } from './config'
 
-import { capitalize, lightenDarkenColor } from './utils'
-import { angleDown, more, facebook, website, linkedIn, twitter, close, github } from './icons'
+import { capitalize, lightenDarkenColor, renderStringArray } from './utils'
+import { angleDown, more, facebook, website, linkedIn, twitter, close, github, check } from './icons'
 
 const mediaSVGs = { facebook, website, linkedIn, twitter, github }
 
@@ -43,19 +43,65 @@ class ExplainIt {
     return wrapIntoAnchor(mediaSVGs[mediaKey])
   };
 
+  _renderThemePicker = (themes, primaryColor) => {
+    const themePickerList = renderStringArray(themes.map(([title, value]) => {
+      return (
+        `<li class="${styles.themePicker__item}">
+          <button
+            style="background: ${value};"
+            class="${styles.swatch} ${primaryColor['500'] === value ? styles['swatch--active'] : ''}"
+            title="${title}"
+          >
+            <span>
+              ${check}
+            </span>
+          </button>
+        </li>`
+      )
+    }))
+
+    return (
+      `<ul class="${styles.themePicker}">
+        ${themePickerList}
+        <li class="${styles.themePicker__item}">
+          <div class="${styles.themeInput}">
+            <span class="${styles.themeInput__addon}">
+              <button class="${styles.swatch}" title="custom"></button>
+            </span>
+            <input placeholder="${primaryColor['500']}"></input>
+          </div>
+        </li>
+      </ul>`
+    )
+  }
+
+  _renderDevPanel = ({ config: { isDev, theme } }) => {
+    if (!isDev) return ''
+
+    return (
+      `<div class="${styles.card}">
+        <div class="${styles.card__head}">
+          <h2>Dev panel</h2>
+        </div>
+        <div class="${styles.card__content}">
+          ${this._renderThemePicker(Object.entries(themes), theme.primaryColor)}
+        </div>
+      </div>`
+    )
+  }
+
   _renderStack = (stack = []) =>
-    this._normalizeStackNames(stack).reduce(
-      (prev, stackItem) => prev + (this._getStackHTML(stackItem) || ''),
-      ''
+    renderStringArray(
+      this._normalizeStackNames(stack)
+        .map(stackItem => this._getStackHTML(stackItem))
     )
 
   _renderMedia = (media) =>
-    Object.keys(media)
-      .filter((mediaKey) => Boolean(media[mediaKey]))
-      .reduce(
-        (prev, mediaKey) => prev + this._getMediaHTML(mediaKey, media[mediaKey]),
-        ''
-      )
+    renderStringArray(
+      Object.keys(media)
+        .filter((mediaKey) => Boolean(media[mediaKey]))
+        .map(mediaKey => this._getMediaHTML(mediaKey, media[mediaKey]))
+    )
 
   _hasMedia = (media = {}) =>
     Object.keys(media).some((mediaKey) => media[mediaKey])
@@ -110,43 +156,48 @@ class ExplainIt {
     ) : ''
   )
 
-  getWidgetHTML = ({ title, shortDescription, description, stack, media }) => `
-    <div id="explainit" class="explainit">
-      <div id="explainit__frame" class="explainit__frame${this.isOpen ? ' explainit__frame--opened' : ''}">
-        <button id="explainit__close" class="${styles.header__close}">
-          ${close}
-        </button>
-        <div class="${styles.frame__inner}">
-          <div
-            class="${styles.header}"
-            style="background: linear-gradient(to bottom, ${this.theme.primaryColor[500]}, ${this.theme.primaryColor[700]});"
-          >
-            <div class="${styles.header__bg}" style="${banners.hideout}"></div>
-            <div class="${styles.header__content}">
-              <h1 class="${styles.title}">${title}</h1>
-              ${this._renderShortDescription(shortDescription)}
+  _getWidgetHTML = (config) => {
+    const { title, shortDescription, description, stack, media, config: { theme } } = config
+
+    return (
+      `<div id="explainit" class="explainit">
+        <div id="explainit__frame" class="explainit__frame${this.isOpen ? ' explainit__frame--opened' : ''}">
+          <button id="explainit__close" class="${styles.header__close}">
+            ${close}
+          </button>
+          <div class="${styles.frame__inner}">
+            <div
+              class="${styles.header}"
+              style="background: linear-gradient(to bottom, ${theme.primaryColor[500]}, ${theme.primaryColor[700]});"
+            >
+              <div class="${styles.header__bg}" style="background-image: ${banners.hideout}"></div>
+              <div class="${styles.header__content}">
+                <h1 class="${styles.title}">${title}</h1>
+                ${this._renderShortDescription(shortDescription)}
+              </div>
             </div>
-          </div>
-          <div class="${styles.content}">
-            <div class="${styles.content__inner}">
-              ${this._renderStackCard(stack)}
-              ${this._renderDescriptionCard(description)}
-              ${this._renderMediaCard(media)}
+            <div class="${styles.content}">
+              <div class="${styles.content__inner}">
+                ${this._renderDevPanel(config)}
+                ${this._renderStackCard(stack)}
+                ${this._renderDescriptionCard(description)}
+                ${this._renderMediaCard(media)}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        id="explainit__launcher"
-        class="explainit__launcher ${this.isOpen ? ' explainit__launcher--open' : ''}"
-        style="background-color: ${this.theme.primaryColor[500]};"
-      >
-        <span style="display: inherit; color: ${this.theme.primaryColor[900]}">
-          ${this.isOpen ? (angleDown) : (more)}
-        </span>
+        <div
+          id="explainit__launcher"
+          class="explainit__launcher ${this.isOpen ? ' explainit__launcher--open' : ''}"
+          style="background-color: ${theme.primaryColor[500]};"
+        >
+          <span style="display: inherit; color: ${theme.primaryColor[900]}">
+            ${this.isOpen ? (angleDown) : (more)}
+          </span>
         </div>
-    </div>
-  `;
+      </div>`
+    )
+  };
 
   constructor ({
     title = '',
@@ -160,6 +211,9 @@ class ExplainIt {
       twitter: null,
       facebook: null,
       github: null
+    },
+    config = {
+      isDev: false
     }
   } = {}) {
     this._configCheck({
@@ -183,9 +237,12 @@ class ExplainIt {
       facebook: media.facebook,
       github: media.github
     }
-    this.theme = this._buildTheme({
-      primaryColor: themes.turquoise
-    })
+    this.config = {
+      ...config,
+      theme: this._buildTheme({
+        primaryColor: themes.turquoise
+      })
+    }
 
     this.isOpen = false
 
@@ -205,18 +262,13 @@ class ExplainIt {
   _initWidget () {
     this.rootElm.insertAdjacentHTML(
       'beforeend',
-      this.getWidgetHTML({
+      this._getWidgetHTML({
         title: this.title,
         shortDescription: this.shortDescription,
         description: this.description,
         stack: this.stack,
-        media: {
-          website: this.media.website,
-          linkedIn: this.media.linkedIn,
-          twitter: this.media.twitter,
-          facebook: this.media.facebook,
-          github: this.media.github
-        }
+        media: this.media,
+        config: this.config
       })
     )
 

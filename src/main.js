@@ -36,6 +36,9 @@ const explainit = new ExplainIt({
     twitter: 'https://twitter.com/matiasperz_',
     linkedIn: 'https://www.linkedin.com/in/matias-sebastian-perez-24012b180/',
     github: 'https://github.com/matias4205'
+  },
+  config: {
+    isDev: false
   }
 })
 

@@ -25,5 +25,7 @@ export const lightenDarkenColor = (hex, amt) => {
   if (g > 255) g = 255
   else if (g < 0) g = 0
 
-  return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16)
+  return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16).toUpperCase()
 }
+
+export const renderStringArray = (arr) => arr.join('')
