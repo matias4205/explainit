@@ -27,5 +27,3 @@ export const lightenDarkenColor = (hex, amt) => {
 
   return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16).toUpperCase()
 }
-
-export const renderStringArray = (arr) => arr.join('')

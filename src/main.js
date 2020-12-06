@@ -38,7 +38,7 @@ const explainit = new ExplainIt({
     github: 'https://github.com/matias4205'
   },
   config: {
-    isDev: false
+    isDev: true
   }
 })
 
