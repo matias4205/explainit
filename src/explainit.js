@@ -9,8 +9,13 @@ import Description from './components/Description/Description'
 import Media from './components/Media/Media'
 import { ThemeProvider } from './components/Theme'
 
+import { configCheck } from './utils'
+
 const Explainit = ({
-  config: {
+  config = {}
+}) => {
+  const [isOpen, setIsOpen] = useState(false)
+  let {
     title = '',
     shortDescription = '',
     description = '',
@@ -23,9 +28,9 @@ const Explainit = ({
       facebook: null,
       github: null
     }
-  } = {}
-}) => {
-  const [isOpen, setIsOpen] = useState(false)
+  } = config
+
+  configCheck(config)
 
   stack = stack.map((stackItem = '') => stackItem.toLowerCase())
   media = Object.keys(media)
@@ -37,6 +42,7 @@ const Explainit = ({
       <div id='explainit' className='explainit'>
         {isOpen && (
           <Frame
+            handleToggle={() => setIsOpen(!isOpen)}
             header={
               <Header title={title} shortDescription={shortDescription} />
             }

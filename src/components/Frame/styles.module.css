@@ -8,6 +8,9 @@
   margin-bottom: 20px;
   width: 360px;
   overflow: hidden;
+}
+
+.root:global {
   animation-duration: .3s;
   animation-fill-mode: forwards;
   animation-name: fadeInUp;
