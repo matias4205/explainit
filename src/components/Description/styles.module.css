@@ -1,0 +1,30 @@
+.description h1,
+.description h2,
+.description h3,
+.description h4,
+.description h5,
+.description h6 {
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.description h1,
+.description h2,
+.description h3 {
+  margin-top: 14px;
+}
+
+.description ul {
+  margin-bottom: 12px;
+  padding-left: 1.7rem;
+  list-style-type: disc;
+}
+
+.description a,
+.description a:visited {
+  color: var(--link-blue);
+}
+
+.description p {
+  margin-bottom: 8px;
+}

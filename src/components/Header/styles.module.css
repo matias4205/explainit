@@ -11,9 +11,10 @@
 }
 
 .shortDescription {
-  margin-top: .3rem;
+  margin-top: .5rem;
   font-size: 15px;
   color: white;
+  line-height: 1.2rem;
 }
 
 .header__bg {

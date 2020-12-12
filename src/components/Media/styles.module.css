@@ -1,0 +1,31 @@
+.media {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.media__item {
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.media__item svg {
+  width: 18px;
+  fill: var(--gray-300);
+}
+
+.media__item:hover svg {
+  width: 18px;
+  fill: var(--gray-700);
+}
+
+.media__item:first-child {
+  margin-left: 0;
+}
+
+.media__item:last-child {
+  margin-right: 0;
+}

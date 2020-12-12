@@ -3,11 +3,11 @@ import { useState } from 'preact/hooks'
 
 import Frame from './components/Frame'
 import Header from './components/Header'
-import Card from './components/Card'
 import Launcher from './components/Launcher/Launcher'
-
-import { ThemeProvider } from './components/Theme'
 import StackList from './components/StackList/StackList'
+import Description from './components/Description/Description'
+import Media from './components/Media/Media'
+import { ThemeProvider } from './components/Theme'
 
 const Explainit = ({
   config: {
@@ -27,6 +27,11 @@ const Explainit = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
+  stack = stack.map((stackItem = '') => stackItem.toLowerCase())
+  media = Object.keys(media)
+    .filter((mediaKey) => Boolean(media[mediaKey]))
+    .map((mediaKey) => ({ name: mediaKey, value: media[mediaKey] }))
+
   return (
     <ThemeProvider>
       <div id='explainit' className='explainit'>
@@ -38,6 +43,8 @@ const Explainit = ({
             content={
               <Fragment>
                 <StackList stack={stack} />
+                <Description description={description} />
+                <Media media={media} />
               </Fragment>
             }
           />
