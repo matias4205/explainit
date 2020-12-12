@@ -1,0 +1,25 @@
+.stack {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+li.stack__item {
+  margin: 0 .4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.stack__item svg {
+  width: 28px;
+}
+
+.stack__item:first-child {
+  margin-left: 0;
+}
+
+.stack__item:last-child {
+  margin-right: 0;
+}

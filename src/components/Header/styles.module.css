@@ -1,0 +1,31 @@
+.root {
+  position: relative;
+  padding: 25px 28px;
+  padding-bottom: 60px;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.shortDescription {
+  margin-top: .3rem;
+  font-size: 15px;
+  color: white;
+}
+
+.header__bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.header__content {
+  position: relative;
+  z-index: 5;
+}

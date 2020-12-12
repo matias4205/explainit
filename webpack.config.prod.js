@@ -24,8 +24,7 @@ module.exports = {
           options: {
             plugins: [
               '@babel/plugin-proposal-class-properties'
-            ],
-            presets: ['@babel/preset-env']
+            ]
           }
         }
       },

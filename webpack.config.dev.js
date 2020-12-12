@@ -3,17 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   mode: 'development',
   entry: {
-    app: './src/main.js'
+    app: './src/index.js'
   },
   output: {
     filename: 'app.bundle.js',
     publicPath: '/'
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    })
-  ],
   module: {
     rules: [
       {
@@ -24,17 +19,18 @@ module.exports = {
           options: {
             plugins: [
               '@babel/plugin-proposal-class-properties'
-            ],
-            presets: ['@babel/preset-env']
+            ]
           }
         }
       },
       {
         test: /\.css$/i,
         use: [
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
+              importLoaders: 1,
               modules: {
                 localIdentName: '[local]--[hash:base64:5]'
               }
@@ -46,10 +42,16 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          'style-loader',
           'css-loader'
         ],
         exclude: /\.module\.css$/
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    })
+  ]
 }
