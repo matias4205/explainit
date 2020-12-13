@@ -1,6 +1,7 @@
-import ExplainIt from './explainit'
+import { renderWidget } from './index.js'
 
-const explainit = new ExplainIt({
+renderWidget({
+  rootElm: document.querySelector('#main'),
   title: 'Petgram',
   shortDescription: 'Petgram es una aplicación realizada en el curso de React Avanzado en Platzi. Las imágenes que se muestran son de mascotas 🐶.',
   stack: ['graphql', 'react', 'redwood', 'next'],
@@ -38,5 +39,3 @@ const explainit = new ExplainIt({
     github: 'https://github.com/matias4205'
   }
 })
-
-explainit.open()

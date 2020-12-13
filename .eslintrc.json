@@ -2,5 +2,16 @@
   "parser": "babel-eslint",
   "extends": [
     "./node_modules/standard/eslintrc.json"
-  ]
+  ],
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false,
+        "varsIgnorePattern": "(h)"
+      }
+    ]
+  }
 }

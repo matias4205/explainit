@@ -11,6 +11,8 @@ import { ThemeProvider } from './components/Theme'
 
 import { configCheck } from './utils'
 
+import './styles.global.css'
+
 const Explainit = ({
   config = {}
 }) => {
@@ -20,7 +22,6 @@ const Explainit = ({
     shortDescription = '',
     description = '',
     stack = [],
-    rootElm = document.body,
     media = {
       website: null,
       linkedIn: null,

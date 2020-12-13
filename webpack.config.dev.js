@@ -3,10 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   mode: 'development',
   entry: {
-    app: './src/index.js'
+    app: './src/main.js'
   },
   output: {
-    filename: 'app.bundle.js',
+    filename: 'explainit.js',
     publicPath: '/'
   },
   module: {

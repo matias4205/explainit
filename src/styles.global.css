@@ -26,49 +26,6 @@
   --background: --var(--gray-100);
 }
 
-/* ----- START OF CSS-RESET ----- */
-/* 
-.explainit p,
-.explainit ol,
-.explainit ul,
-.explainit li,
-.explainit dl,
-.explainit dt,
-.explainit dd,
-.explainit blockquote,
-.explainit figure,
-.explainit fieldset,
-.explainit legend,
-.explainit textarea,
-.explainit pre,
-.explainit iframe,
-.explainit hr,
-.explainit h1,
-.explainit h2,
-.explainit h3,
-.explainit h4,
-.explainit h5,
-.explainit h6 {
-  margin: 0;
-  padding: 0;
-}
-
-.explainit h1,
-.explainit h2,
-.explainit h3,
-.explainit h4,
-.explainit h5,
-.explainit h6 {
-  font-size: 100%;
-  font-weight: normal;
-}
-
-.explainit * {
-  box-sizing: border-box;
-} */
-
-/* ----- END OF CSS-RESET ----- */
-
 .explainit {
   display: flex;
   flex-direction: column;

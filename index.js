@@ -1,1 +1,1 @@
-export { default } from './src/explainit'
+export { default } from './src'

@@ -32,6 +32,12 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
+            loader: 'style-loader',
+            options: {
+              injectType: 'singletonStyleTag'
+            }
+          },
+          {
             loader: 'css-loader',
             options: {
               modules: {
@@ -45,6 +51,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'styleTag'
+            }
+          },
           'css-loader'
         ],
         exclude: /\.module\.css$/
