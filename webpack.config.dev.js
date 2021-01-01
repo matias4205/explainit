@@ -1,28 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const _explainitInsertStyles = (element) => {
-  let parent
-
-  const interval = setInterval(() => {
-    parent = document.querySelector('#explainit__iframe')?.contentWindow?.document?.head
-
-    if (parent) {
-      var lastInsertedElement = window._lastElementInsertedByStyleLoader
-
-      if (!lastInsertedElement) {
-        parent.insertBefore(element, parent.firstChild)
-      } else if (lastInsertedElement.nextSibling) {
-        parent.insertBefore(element, lastInsertedElement.nextSibling)
-      } else {
-        parent.appendChild(element)
-      }
-
-      window._lastElementInsertedByStyleLoader = element
-      clearInterval(interval)
-    }
-  }, 10)
-}
-
 module.exports = {
   mode: 'development',
   entry: {
@@ -52,7 +29,9 @@ module.exports = {
           {
             loader: 'style-loader',
             options: {
-              insert: _explainitInsertStyles
+              attributes: {
+                'data-explainit-style': true
+              }
             }
           },
           {
@@ -73,7 +52,9 @@ module.exports = {
           {
             loader: 'style-loader',
             options: {
-              insert: _explainitInsertStyles
+              attributes: {
+                'data-explainit-style': true
+              }
             }
           },
           'css-loader'

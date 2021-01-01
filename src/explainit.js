@@ -11,6 +11,7 @@ import { ThemeProvider } from './components/Theme'
 import IFrame from './components/IFrame'
 
 import { configCheck } from './utils'
+import { onIframeLoad } from './helpers'
 
 import './styles.global.css'
 
@@ -40,7 +41,9 @@ const Explainit = ({
     .map((mediaKey) => ({ name: mediaKey, value: media[mediaKey] }))
 
   return (
-    <IFrame>
+    <IFrame
+      onLoad={onIframeLoad}
+    >
       <ThemeProvider>
         <div id='explainit' className='explainit'>
           {isOpen && (
