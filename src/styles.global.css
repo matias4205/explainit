@@ -32,9 +32,12 @@
   align-items: flex-end;
   justify-content: flex-end;
   position: absolute;
-  bottom: 20px;
-  right: 35px;
+  padding-bottom: 20px;
+  padding-right: 35px;
+  width: 100vw;
+  height: 100vh;
   font-family: 'Nunito Sans';
+  box-sizing: border-box;
 }
 
 @keyframes fadeInUp {

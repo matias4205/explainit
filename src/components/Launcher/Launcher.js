@@ -1,9 +1,11 @@
 import { h } from 'preact'
+
 import { useTheme } from '../Theme'
+import IFrame from '../IFrame'
 
-import { angleDown, more } from '../../icons'
-
+import { onIframeLoad } from '../../helpers'
 import s from './styles.module.css'
+import { angleDown, more } from '../../icons'
 
 const Launcher = ({
   isOpen = false,
@@ -14,8 +16,8 @@ const Launcher = ({
   return (
     <div
       id='explainit__launcher'
-      className={`${s.explainit__launcher} ${isOpen ? ` ${s['explainit__launcher--open']}` : ''}`}
       style={`background-color: ${primaryColor[500]};`}
+      className={`${s.explainit__launcher} ${isOpen ? ` ${s['explainit__launcher--open']}` : ''}`}
       onClick={handleToggle}
     >
       <span

@@ -41,11 +41,11 @@ const Explainit = ({
     .map((mediaKey) => ({ name: mediaKey, value: media[mediaKey] }))
 
   return (
-    <IFrame
-      onLoad={onIframeLoad}
-    >
-      <ThemeProvider>
-        <div id='explainit' className='explainit'>
+    <div id='explainit' className='explainit'>
+      <IFrame
+        onLoad={onIframeLoad}
+      >
+        <ThemeProvider>
           {isOpen && (
             <Frame
               handleToggle={() => setIsOpen(!isOpen)}
@@ -62,9 +62,9 @@ const Explainit = ({
             />
           )}
           <Launcher isOpen={isOpen} handleToggle={() => setIsOpen(!isOpen)} />
-        </div>
-      </ThemeProvider>
-    </IFrame>
+        </ThemeProvider>
+      </IFrame>
+    </div>
   )
 }
 
