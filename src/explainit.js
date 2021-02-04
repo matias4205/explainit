@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact'
-import { useState } from 'preact/hooks'
+import { useEffect, useRef, useState } from 'preact/hooks'
 
 import Frame from './components/Frame'
 import Header from './components/Header'
@@ -11,7 +11,7 @@ import { ThemeProvider } from './components/Theme'
 import IFrame from './components/IFrame'
 
 import { configCheck } from './utils'
-import { onIframeLoad } from './helpers'
+import { getWindowSize, onIframeLoad } from './helpers'
 
 import './styles.global.css'
 
@@ -19,6 +19,7 @@ const Explainit = ({
   config = {}
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const iFrameRef = useRef(null)
   let {
     title = '',
     shortDescription = '',
@@ -33,6 +34,15 @@ const Explainit = ({
     }
   } = config
 
+  useEffect(() => {
+    window.onresize = () => {
+      iFrameRef.current.contentWindow.postMessage({
+        type: 'size',
+        payload: getWindowSize()
+      })
+    }
+  }, [])
+
   configCheck(config)
 
   stack = stack.map((stackItem = '') => stackItem.toLowerCase())
@@ -44,6 +54,8 @@ const Explainit = ({
     <div id='explainit' className='explainit'>
       <IFrame
         onLoad={onIframeLoad}
+        isOpen={isOpen}
+        ref={iFrameRef}
       >
         <ThemeProvider>
           {isOpen && (

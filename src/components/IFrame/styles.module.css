@@ -1,0 +1,11 @@
+.root {
+  border: none;
+  width: 60px;
+  height: 60px;
+}
+
+.isOpen {
+  height: calc(100vh - 120px);
+  min-height: 256px;
+  max-height: 650px;
+}
